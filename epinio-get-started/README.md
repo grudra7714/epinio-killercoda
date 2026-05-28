@@ -4,6 +4,8 @@ Interactive [Killercoda](https://killercoda.com/) scenario: **Epinio - From App 
 
 Learners install [Epinio](https://epinio.io/) on Kubernetes, deploy a sample app with `epinio push`, manage it (logs, scaling, env vars), and work with Epinio namespaces - without needing deep Kubernetes knowledge.
 
+For a deploy-only scenario with Epinio pre-installed in the background, see [epinio-deploy-app](../epinio-deploy-app/).
+
 ## Scenario overview
 
 | Step | Title | What learners do |
@@ -16,7 +18,7 @@ Learners install [Epinio](https://epinio.io/) on Kubernetes, deploy a sample app
 
 **Environment:** single-node Kubernetes (`kubernetes-kubeadm-1node`) with `kubectl` and `helm` pre-installed.
 
-**Background setup:** `intro/background.sh` installs cluster prerequisites from the [Epinio devcontainer setup](https://github.com/epinio/epinio/blob/main/.devcontainer/setup.sh): cert-manager v1.18.1, local-path-provisioner, and nginx ingress.
+**Background setup:** `intro/background.sh` installs cluster prerequisites from the [Epinio devcontainer setup](https://github.com/epinio/epinio/blob/main/.devcontainer/setup.sh): cert-manager v1.18.1, local-path-provisioner, and nginx ingress with `hostNetwork` so the controller listens on node ports 80/443 (required on bare-metal / Killercoda kubeadm).
 
 ## Repository structure
 

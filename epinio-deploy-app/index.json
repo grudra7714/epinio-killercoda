@@ -1,0 +1,33 @@
+{
+  "title": "Epinio - Deploy Your First Application",
+  "description": "Deploy and manage an application on a pre-installed Epinio cluster using the Epinio CLI",
+  "details": {
+    "intro": {
+      "text": "intro/text.md",
+      "background": "intro/background.sh"
+    },
+    "steps": [
+      {
+        "title": "Deploy a Sample Application",
+        "text": "step1/text.md",
+        "verify": "step1/verify.sh"
+      },
+      {
+        "title": "Manage Your Application",
+        "text": "step2/text.md",
+        "verify": "step2/verify.sh"
+      },
+      {
+        "title": "Namespaces and Cleanup",
+        "text": "step3/text.md",
+        "verify": "step3/verify.sh"
+      }
+    ],
+    "finish": {
+      "text": "finish/text.md"
+    }
+  },
+  "backend": {
+    "imageid": "kubernetes-kubeadm-1node"
+  }
+}

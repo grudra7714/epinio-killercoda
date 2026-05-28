@@ -1,13 +1,12 @@
 # Congratulations!
 
-You have successfully completed the Epinio getting started scenario.
+You have successfully deployed and managed an application with Epinio.
 
 ## What You Accomplished
 
-- **Installed Epinio** on a Kubernetes cluster using Helm with cert-manager, local-path storage, and nginx ingress (matching the [official devcontainer setup](https://github.com/epinio/epinio/blob/main/.devcontainer/setup.sh))
 - **Deployed an application** from source code using `epinio push` - no Dockerfile required
 - **Managed your application** - viewed logs, scaled instances, and set environment variables
-- **Organized applications** using Epinio namespaces
+- **Organized applications** using Epinio namespaces and cleaned up resources
 
 ## Key Takeaways
 
@@ -18,8 +17,7 @@ You have successfully completed the Epinio getting started scenario.
 
 ## Next Steps
 
-- Try the [deploy-only scenario](../epinio-deploy-app/) if you want to focus on `epinio push` without cluster setup
+- Try the [Epinio installation scenario](../epinio-get-started/) to learn how Epinio is set up on a cluster
 - Explore [Epinio documentation](https://docs.epinio.io/) for advanced features
 - Learn about [service bindings](https://docs.epinio.io/howtos/services) to connect databases and other services
-- Try deploying your own application code with `epinio push`
 - Check out [Epinio on GitHub](https://github.com/epinio/epinio)

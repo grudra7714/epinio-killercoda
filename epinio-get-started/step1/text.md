@@ -78,6 +78,14 @@ mv epinio /usr/local/bin/
 
 ## Log In to Epinio
 
+Confirm the Epinio API is reachable on port 443 (sslip.io resolves to your node IP):
+
+```bash
+curl -k -sf "https://epinio.${EPINIO_SYSTEM_DOMAIN}" && echo "API reachable"
+```{{exec}}
+
+If you see `connection refused`, wait for the ingress controller to finish starting (`kubectl get pods -n ingress-nginx`) and retry.
+
 Log in to your Epinio installation:
 
 ```bash
