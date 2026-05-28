@@ -1,22 +1,22 @@
 # Epinio on Killercoda
 
-Interactive [Killercoda](https://killercoda.com/) scenario: **Epinio — From App to URL in One Step**.
+Interactive [Killercoda](https://killercoda.com/) scenario: **Epinio - From App to URL in One Step**.
 
-Learners install [Epinio](https://epinio.io/) on Kubernetes, deploy a sample app with `epinio push`, manage it (logs, scaling, env vars), and work with Epinio namespaces — without needing deep Kubernetes knowledge.
+Learners install [Epinio](https://epinio.io/) on Kubernetes, deploy a sample app with `epinio push`, manage it (logs, scaling, env vars), and work with Epinio namespaces - without needing deep Kubernetes knowledge.
 
 ## Scenario overview
 
 | Step | Title | What learners do |
 |------|--------|------------------|
-| Intro | — | Overview; cert-manager installs in the background |
-| 1 | Install Epinio | Helm install Epinio + CLI login |
+| Intro | - | Overview; cert-manager, local-path storage, and nginx ingress install in the background |
+| 1 | Install Epinio | Verify prerequisites, Helm install Epinio (devcontainer chart values), CLI login |
 | 2 | Deploy a Sample Application | `epinio push` with Paketo buildpacks |
 | 3 | Manage Your Application | Logs, scale to 3 instances, set env vars |
 | 4 | Namespaces and Cleanup | Create/target namespaces, delete apps |
 
 **Environment:** single-node Kubernetes (`kubernetes-kubeadm-1node`) with `kubectl` and `helm` pre-installed.
 
-**Background setup:** `intro/background.sh` installs cert-manager (required for Epinio TLS).
+**Background setup:** `intro/background.sh` installs cluster prerequisites from the [Epinio devcontainer setup](https://github.com/epinio/epinio/blob/main/.devcontainer/setup.sh): cert-manager v1.18.1, local-path-provisioner, and nginx ingress.
 
 ## Repository structure
 
@@ -25,7 +25,7 @@ Learners install [Epinio](https://epinio.io/) on Kubernetes, deploy a sample app
 ├── index.json              # Scenario metadata and step definitions
 ├── intro/
 │   ├── text.md             # Intro content
-│   └── background.sh       # cert-manager Helm install (runs on start)
+│   └── background.sh       # cert-manager, storage, ingress (runs on start)
 ├── step1/ … step4/
 │   ├── text.md             # Step instructions (Killercoda {{exec}} blocks)
 │   └── verify.sh           # Step completion checks
@@ -41,7 +41,7 @@ Defines the scenario title, description, step paths, and backend image. See [Kil
 
 Each `verify.sh` exits `0` when the learner has completed the step:
 
-- **step1:** Epinio namespace exists and `epinio settings show` succeeds
+- **step1:** Epinio namespace exists, nginx ingress is running, and `epinio settings show` succeeds
 - **step2:** `sample` app is running (`1/1`)
 - **step3:** Environment variable `MY_VAR` is set on `sample`
 - **step4:** `production` namespace has been removed (cleanup done)

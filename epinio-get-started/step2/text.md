@@ -1,6 +1,6 @@
 # Deploy a Sample Application
 
-Now that Epinio is installed, let's deploy an application from source code. Epinio uses **Paketo Buildpacks** to automatically detect your language and build a container image — no Dockerfile needed.
+Now that Epinio is installed, let's deploy an application from source code. Epinio uses **Paketo Buildpacks** to automatically detect your language and build a container image - no Dockerfile needed.
 
 ## Clone the Sample App
 

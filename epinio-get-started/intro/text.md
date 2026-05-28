@@ -6,15 +6,21 @@
 
 In this scenario, you will:
 
-1. **Install Epinio** on a Kubernetes cluster using Helm
+1. **Install Epinio** on a Kubernetes cluster using Helm (same chart settings as the [official devcontainer setup](https://github.com/epinio/epinio/blob/main/.devcontainer/setup.sh))
 2. **Deploy a sample application** from source code using `epinio push`
-3. **Manage your application** — view logs, scale instances, and inspect details
+3. **Manage your application** - view logs, scale instances, and inspect details
 4. **Work with namespaces** to organize your applications
 
 ## Prerequisites
 
 This environment provides a single-node Kubernetes cluster with `kubectl` and `helm` pre-installed.
 
-A background script is installing **cert-manager**, which Epinio requires for TLS certificate management. This may take a minute or two to complete.
+A background script is installing the cluster prerequisites Epinio expects:
+
+- **cert-manager** (TLS certificates)
+- **local-path-provisioner** (default storage class)
+- **nginx ingress controller** (routing)
+
+This may take several minutes to complete.
 
 Let's get started!
