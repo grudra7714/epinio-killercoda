@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-EPINIO_VERSION="1.13.10"
+EPINIO_VERSION="1.14.0-rc5"
 
 # Full Epinio install for Killercoda
 
@@ -30,6 +30,9 @@ helm upgrade --install ingress-nginx ingress-nginx/ingress-nginx \
     --set controller.service.type=ClusterIP \
     --set controller.ingressClassResource.default=true \
     --set controller.admissionWebhooks.enabled=false \
+    --set controller.config.proxy-read-timeout=1800 \
+    --set controller.config.proxy-send-timeout=1800 \
+    --set controller.config.proxy-connect-timeout=300 \
     --wait
 
 NODE_IP=$(kubectl get nodes -o jsonpath='{.items[0].status.addresses[?(@.type=="InternalIP")].address}')
@@ -39,6 +42,7 @@ cat > /etc/profile.d/epinio-env.sh <<EOF
 export NODE_IP="${NODE_IP}"
 export EPINIO_SYSTEM_DOMAIN="${EPINIO_SYSTEM_DOMAIN}"
 export EPINIO_VERSION="${EPINIO_VERSION}"
+export EPINIO_TIMEOUT_MULTIPLIER=2
 EOF
 
 echo "Installing Epinio..."
@@ -49,6 +53,9 @@ helm upgrade --install epinio epinio/epinio --version "${EPINIO_VERSION}" \
     --set global.domain="${EPINIO_SYSTEM_DOMAIN}" \
     --set server.disableTracking="true" \
     --set ingress.nginxSSLRedirect="false" \
+    --set ingress.proxyReadTimeout=1800s \
+    --set ingress.proxyConnectTimeout=300s \
+    --set server.timeoutMultiplier=2 \
     --set "extraEnv[0].name=KUBE_API_QPS" --set-string "extraEnv[0].value=50" \
     --set "extraEnv[1].name=KUBE_API_BURST" --set-string "extraEnv[1].value=100" \
     --wait

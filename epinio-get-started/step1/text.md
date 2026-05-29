@@ -48,12 +48,15 @@ helm repo update
 Install Epinio (pin the chart version so it matches the CLI):
 
 ```bash
-export EPINIO_VERSION="1.13.10"
+export EPINIO_VERSION="1.14.0-rc5"
 helm upgrade --install epinio epinio/epinio --version "${EPINIO_VERSION}" \
     --namespace epinio --create-namespace \
     --set global.domain="${EPINIO_SYSTEM_DOMAIN}" \
     --set server.disableTracking="true" \
     --set ingress.nginxSSLRedirect="false" \
+    --set ingress.proxyReadTimeout=1800s \
+    --set ingress.proxyConnectTimeout=300s \
+    --set server.timeoutMultiplier=2 \
     --set "extraEnv[0].name=KUBE_API_QPS" --set-string "extraEnv[0].value=50" \
     --set "extraEnv[1].name=KUBE_API_BURST" --set-string "extraEnv[1].value=100" \
     --wait

@@ -12,6 +12,14 @@ git clone https://github.com/epinio/epinio.git /tmp/epinio-repo
 
 ## Push the Application
 
+`epinio push` builds your app with Paketo buildpacks. On Killercoda this can take several minutes. A `504 Gateway Time-out` usually means nginx cut the connection off too early (fixed by longer proxy timeouts in the install step).
+
+Give the CLI more time while you wait:
+
+```bash
+export EPINIO_TIMEOUT_MULTIPLIER=2
+```{{exec}}
+
 Ensure the CLI matches the server (fixes `404` on `/deployments` when versions differ):
 
 ```bash

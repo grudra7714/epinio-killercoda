@@ -28,4 +28,7 @@ helm upgrade --install ingress-nginx ingress-nginx/ingress-nginx \
     --set controller.service.type=ClusterIP \
     --set controller.ingressClassResource.default=true \
     --set controller.admissionWebhooks.enabled=false \
+    --set controller.config.proxy-read-timeout=1800 \
+    --set controller.config.proxy-send-timeout=1800 \
+    --set controller.config.proxy-connect-timeout=300 \
     --wait
