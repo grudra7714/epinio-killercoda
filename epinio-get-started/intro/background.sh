@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-# Prerequisites for Epinio (aligned with epinio/.devcontainer/setup.sh)
-# https://github.com/epinio/epinio/blob/main/.devcontainer/setup.sh
+# Cluster prerequisites for Epinio
 
 echo "Installing Cert Manager..."
 helm repo add cert-manager https://charts.jetstack.io

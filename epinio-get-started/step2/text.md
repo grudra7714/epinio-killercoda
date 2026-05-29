@@ -12,6 +12,12 @@ git clone https://github.com/epinio/epinio.git /tmp/epinio-repo
 
 ## Push the Application
 
+Ensure the CLI matches the server (fixes `404` on `/deployments` when versions differ):
+
+```bash
+epinio client-sync
+```{{exec}}
+
 Deploy the sample app with a single command:
 
 ```bash

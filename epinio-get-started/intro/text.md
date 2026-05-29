@@ -6,7 +6,7 @@
 
 In this scenario, you will:
 
-1. **Install Epinio** on a Kubernetes cluster using Helm (same chart settings as the [official devcontainer setup](https://github.com/epinio/epinio/blob/main/.devcontainer/setup.sh))
+1. **Install Epinio** on a Kubernetes cluster using Helm
 2. **Deploy a sample application** from source code using `epinio push`
 3. **Manage your application** - view logs, scale instances, and inspect details
 4. **Work with namespaces** to organize your applications
@@ -22,5 +22,7 @@ A background script is installing the cluster prerequisites Epinio expects:
 - **nginx ingress controller** (routing)
 
 This may take several minutes to complete.
+
+When you log in to Epinio for the first time, use the default credentials: user `admin`, password `password`.
 
 Let's get started!

@@ -11,14 +11,16 @@ For a deploy-only scenario with Epinio pre-installed in the background, see [epi
 | Step | Title | What learners do |
 |------|--------|------------------|
 | Intro | - | Overview; cert-manager, local-path storage, and nginx ingress install in the background |
-| 1 | Install Epinio | Verify prerequisites, Helm install Epinio (devcontainer chart values), CLI login |
+| 1 | Install Epinio | Verify prerequisites, Helm install Epinio, CLI login |
 | 2 | Deploy a Sample Application | `epinio push` with Paketo buildpacks |
 | 3 | Manage Your Application | Logs, scale to 3 instances, set env vars |
 | 4 | Namespaces and Cleanup | Create/target namespaces, delete apps |
 
 **Environment:** single-node Kubernetes (`kubernetes-kubeadm-1node`) with `kubectl` and `helm` pre-installed.
 
-**Background setup:** `intro/background.sh` installs cluster prerequisites from the [Epinio devcontainer setup](https://github.com/epinio/epinio/blob/main/.devcontainer/setup.sh): cert-manager v1.18.1, local-path-provisioner, and nginx ingress with `hostNetwork` so the controller listens on node ports 80/443 (required on bare-metal / Killercoda kubeadm).
+**Background setup:** `intro/background.sh` installs cert-manager v1.18.1, local-path-provisioner, and nginx ingress with `hostNetwork` so the controller listens on node ports 80/443 (required on bare-metal / Killercoda kubeadm).
+
+**Default login:** user `admin`, password `password` (see [Epinio authorization](https://docs.epinio.io/references/authorization)).
 
 ## Repository structure
 

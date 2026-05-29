@@ -16,7 +16,9 @@ A background script is installing and configuring everything Epinio needs:
 
 - cert-manager, storage, and nginx ingress
 - Epinio server (Helm)
-- Epinio CLI and login session
+- Epinio CLI and an authenticated session as `admin`
+
+On first login, the default password is `password`. If you need to log in again manually, use `epinio login -u admin -p password <URL> --trust-ca`.
 
 This can take several minutes. If a command fails because Epinio is not ready yet, wait and retry.
 

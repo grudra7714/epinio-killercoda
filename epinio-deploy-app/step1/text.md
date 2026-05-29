@@ -1,6 +1,6 @@
 # Deploy a Sample Application
 
-Epinio is installed and configured in the background. Let's confirm it is ready, then deploy an application.
+Epinio is installed and configured in the background (logged in as `admin`; default password is `password` if you need to authenticate again). Let's confirm it is ready, then deploy an application.
 
 ## Verify Epinio is Ready
 
@@ -19,6 +19,13 @@ kubectl get pods -n epinio
 
 If `epinio settings show` fails, the background install may still be in progress. Wait a minute and try again.
 
+If you see a client/server version mismatch warning, sync the CLI to the server:
+
+```bash
+epinio client-sync
+epinio version
+```{{exec}}
+
 If you see `connection refused` on port 443, the ingress controller may still be starting:
 
 ```bash
@@ -35,6 +42,12 @@ git clone https://github.com/epinio/epinio.git /tmp/epinio-repo
 ```{{exec}}
 
 ## Push the Application
+
+Ensure the CLI matches the server (fixes `404` on `/deployments` when versions differ):
+
+```bash
+epinio client-sync
+```{{exec}}
 
 Deploy the sample app with a single command. Epinio uses **Paketo Buildpacks** to detect your language and build a container image - no Dockerfile needed.
 

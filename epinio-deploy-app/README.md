@@ -17,7 +17,7 @@ For the installation-focused scenario, see [epinio-get-started](../epinio-get-st
 
 **Environment:** single-node Kubernetes (`kubernetes-kubeadm-1node`).
 
-**Background setup:** `intro/background.sh` installs cert-manager, local-path storage, nginx ingress (with `hostNetwork` for ports 80/443 on the node), Epinio (Helm), the CLI, and logs in. Writes `/etc/profile.d/epinio-env.sh` and `/var/run/epinio-ready` when complete.
+**Background setup:** `intro/background.sh` installs cert-manager, local-path storage, nginx ingress (with `hostNetwork` for ports 80/443 on the node), Epinio (Helm), the CLI, and logs in as `admin` (password `password`). Writes `/etc/profile.d/epinio-env.sh` and `/var/run/epinio-ready` when complete.
 
 ## Repository structure
 
@@ -46,6 +46,6 @@ Same workflow as [epinio-get-started](../epinio-get-started/README.md#publish-on
 
 ## Related links
 
-- [Epinio devcontainer setup](https://github.com/epinio/epinio/blob/main/.devcontainer/setup.sh)
 - [Epinio documentation](https://docs.epinio.io/)
+- [Epinio authorization (default users)](https://docs.epinio.io/references/authorization)
 - [Epinio on GitHub](https://github.com/epinio/epinio)

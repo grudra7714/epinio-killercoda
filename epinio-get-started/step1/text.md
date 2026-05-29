@@ -1,6 +1,6 @@
 # Install Epinio
 
-These steps follow the Epinio Helm install from the [devcontainer setup script](https://github.com/epinio/epinio/blob/main/.devcontainer/setup.sh), adapted for this Killercoda Kubernetes environment.
+Install Epinio on this Kubernetes cluster using Helm and the Epinio CLI.
 
 ## Verify Prerequisites
 
@@ -28,7 +28,7 @@ If any components are not ready yet, wait a moment and retry.
 
 ## Set the Epinio Domain
 
-Retrieve the node IP and set the system domain (the devcontainer uses `127.0.0.1.sslip.io`; here we use the node IP with sslip.io):
+Retrieve the node IP and set the system domain (wildcard DNS via sslip.io):
 
 ```bash
 export NODE_IP=$(kubectl get nodes -o jsonpath='{.items[0].status.addresses[?(@.type=="InternalIP")].address}')
@@ -45,10 +45,11 @@ helm repo add epinio https://epinio.github.io/helm-charts
 helm repo update
 ```{{exec}}
 
-Install Epinio with the same chart values as the official dev setup:
+Install Epinio (pin the chart version so it matches the CLI):
 
 ```bash
-helm upgrade --install epinio epinio/epinio \
+export EPINIO_VERSION="1.13.10"
+helm upgrade --install epinio epinio/epinio --version "${EPINIO_VERSION}" \
     --namespace epinio --create-namespace \
     --set global.domain="${EPINIO_SYSTEM_DOMAIN}" \
     --set server.disableTracking="true" \
@@ -68,15 +69,18 @@ kubectl get all -n epinio
 
 ## Install the Epinio CLI
 
-Download and install the Epinio CLI:
+Download and install the Epinio CLI (same version as the server):
 
 ```bash
-curl -o epinio -L https://github.com/epinio/epinio/releases/latest/download/epinio-linux-x86_64
+curl -o epinio -L "https://github.com/epinio/epinio/releases/download/v${EPINIO_VERSION}/epinio-linux-x86_64"
 chmod +x epinio
 mv epinio /usr/local/bin/
+epinio version
 ```{{exec}}
 
 ## Log In to Epinio
+
+On first login, Epinio provides a default `admin` user with password `password`. Change these credentials in production.
 
 Confirm the Epinio API is reachable on port 443 (sslip.io resolves to your node IP):
 
@@ -89,11 +93,13 @@ If you see `connection refused`, wait for the ingress controller to finish start
 Log in to your Epinio installation:
 
 ```bash
-epinio login -u admin "https://epinio.${EPINIO_SYSTEM_DOMAIN}" --trust-ca
+epinio login -u admin -p password "https://epinio.${EPINIO_SYSTEM_DOMAIN}" --trust-ca
+epinio client-sync
 ```{{exec}}
 
-Verify the connection:
+Verify the connection and that client/server versions match:
 
 ```bash
+epinio version
 epinio settings show
 ```{{exec}}

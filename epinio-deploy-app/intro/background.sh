@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 set -e
 
-# Full Epinio install (aligned with epinio/.devcontainer/setup.sh)
-# https://github.com/epinio/epinio/blob/main/.devcontainer/setup.sh
+EPINIO_VERSION="1.13.10"
+
+# Full Epinio install for Killercoda
 
 echo "Installing Cert Manager..."
 helm repo add cert-manager https://charts.jetstack.io
@@ -37,12 +38,13 @@ export EPINIO_SYSTEM_DOMAIN="${NODE_IP}.sslip.io"
 cat > /etc/profile.d/epinio-env.sh <<EOF
 export NODE_IP="${NODE_IP}"
 export EPINIO_SYSTEM_DOMAIN="${EPINIO_SYSTEM_DOMAIN}"
+export EPINIO_VERSION="${EPINIO_VERSION}"
 EOF
 
 echo "Installing Epinio..."
 helm repo add epinio https://epinio.github.io/helm-charts
 helm repo update
-helm upgrade --install epinio epinio/epinio \
+helm upgrade --install epinio epinio/epinio --version "${EPINIO_VERSION}" \
     --namespace epinio --create-namespace \
     --set global.domain="${EPINIO_SYSTEM_DOMAIN}" \
     --set server.disableTracking="true" \
@@ -51,8 +53,8 @@ helm upgrade --install epinio epinio/epinio \
     --set "extraEnv[1].name=KUBE_API_BURST" --set-string "extraEnv[1].value=100" \
     --wait
 
-echo "Installing Epinio CLI..."
-curl -fsSL -o /tmp/epinio https://github.com/epinio/epinio/releases/latest/download/epinio-linux-x86_64
+echo "Installing Epinio CLI v${EPINIO_VERSION}..."
+curl -fsSL -o /tmp/epinio "https://github.com/epinio/epinio/releases/download/v${EPINIO_VERSION}/epinio-linux-x86_64"
 chmod +x /tmp/epinio
 mv /tmp/epinio /usr/local/bin/epinio
 
@@ -66,7 +68,8 @@ for i in $(seq 1 60); do
 done
 
 echo "Logging in to Epinio..."
-epinio login -u admin "https://epinio.${EPINIO_SYSTEM_DOMAIN}" --trust-ca
+epinio login -u admin -p password "https://epinio.${EPINIO_SYSTEM_DOMAIN}" --trust-ca
+epinio client-sync
 
 touch /var/run/epinio-ready
 echo "Epinio is ready at https://epinio.${EPINIO_SYSTEM_DOMAIN}"
