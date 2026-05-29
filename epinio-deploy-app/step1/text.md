@@ -56,10 +56,10 @@ Ensure the CLI matches the server (fixes `404` on `/deployments` when versions d
 epinio client-sync
 ```{{exec}}
 
-Deploy the sample app with a single command. Epinio uses **Paketo Buildpacks** to detect your language and build a container image - no Dockerfile needed. Use the Paketo `base` builder:
+Deploy the sample app with a single command. Epinio uses **Paketo Buildpacks** to detect your language and build a container image - no Dockerfile needed. Use the Paketo `full` builder:
 
 ```bash
-epinio push --name sample --path /tmp/epinio-repo/assets/sample-app --builder-image paketobuildpacks/builder:base
+epinio push --name sample --path /tmp/epinio-repo/assets/sample-app --builder-image paketobuildpacks/builder:full
 ```{{exec}}
 
 This command:

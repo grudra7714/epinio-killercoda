@@ -39,7 +39,7 @@ epinio target
 Deploy another instance of the sample app in the production namespace:
 
 ```bash
-epinio push --name sample-prod --path /tmp/epinio-repo/assets/sample-app --builder-image paketobuildpacks/builder:base
+epinio push --name sample-prod --path /tmp/epinio-repo/assets/sample-app --builder-image paketobuildpacks/builder:full
 ```{{exec}}
 
 Now list apps - you'll only see apps in the current namespace:

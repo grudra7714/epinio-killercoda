@@ -26,10 +26,10 @@ Ensure the CLI matches the server (fixes `404` on `/deployments` when versions d
 epinio client-sync
 ```{{exec}}
 
-Deploy the sample app with a single command. Use the Paketo `base` builder (a good default between `tiny` and `full`):
+Deploy the sample app with a single command. Use the Paketo `full` builder (Epinio's default; includes the widest set of buildpacks):
 
 ```bash
-epinio push --name sample --path /tmp/epinio-repo/assets/sample-app --builder-image paketobuildpacks/builder:base
+epinio push --name sample --path /tmp/epinio-repo/assets/sample-app --builder-image paketobuildpacks/builder:full
 ```{{exec}}
 
 This command:
