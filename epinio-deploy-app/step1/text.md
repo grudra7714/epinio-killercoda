@@ -98,10 +98,13 @@ Get the exact route and test it from the terminal:
 ```bash
 source /etc/profile.d/epinio-env.sh
 echo "Expected route: sample.${EPINIO_SYSTEM_DOMAIN}"
-export APP_URL=$(epinio app show sample | grep "Route:" | awk '{print $NF}' | head -1)
+export APP_URL=$(epinio app show sample 2>/dev/null | grep -oE '[[:alnum:]-]+\.[0-9.]+\.sslip\.io' | head -1)
+export APP_URL=${APP_URL:-sample.${EPINIO_SYSTEM_DOMAIN}}
 echo "Internal app URL: https://$APP_URL"
 curl -k "https://$APP_URL"
 ```{{exec}}
+
+The route appears under **Active Routes** in `epinio app show` (not a `Route:` line). You can also read it from `epinio app list` in the **ROUTES** column.
 
 You should see a response from the sample application.
 

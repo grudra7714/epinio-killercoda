@@ -16,7 +16,7 @@ For a deploy-only scenario with Epinio pre-installed in the background, see [epi
 | 3 | Manage Your Application | Logs, scale to 3 instances, set env vars |
 | 4 | Namespaces and Cleanup | Create/target namespaces, delete apps |
 
-**Environment:** single-node Kubernetes (`kubernetes-kubeadm-1node`) with `kubectl` and `helm` pre-installed.
+**Environment:** single-node Kubernetes (`kubernetes-kubeadm-1node-4GB`) with `kubectl` and `helm` pre-installed.
 
 **Background setup:** `intro/background.sh` installs cert-manager v1.18.1, local-path-provisioner, and nginx ingress with `hostNetwork` so the controller listens on node ports 80/443 (required on bare-metal / Killercoda kubeadm).
 

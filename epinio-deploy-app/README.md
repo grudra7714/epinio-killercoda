@@ -15,7 +15,7 @@ For the installation-focused scenario, see [epinio-get-started](../epinio-get-st
 | 2 | Manage Your Application | Logs, scale, environment variables |
 | 3 | Namespaces and Cleanup | Create/target namespaces, deploy, delete resources |
 
-**Environment:** single-node Kubernetes (`kubernetes-kubeadm-1node`).
+**Environment:** single-node Kubernetes (`kubernetes-kubeadm-1node-4GB`).
 
 **Background setup:** `intro/background.sh` installs cert-manager, local-path storage, nginx ingress (with `hostNetwork` for ports 80/443 on the node), Epinio (Helm), the CLI, and logs in as `admin` (password `password`). Writes `/etc/profile.d/epinio-env.sh` and `/var/run/epinio-ready` when complete.
 
