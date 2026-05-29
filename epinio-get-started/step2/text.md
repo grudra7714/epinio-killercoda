@@ -26,10 +26,10 @@ Ensure the CLI matches the server (fixes `404` on `/deployments` when versions d
 epinio client-sync
 ```{{exec}}
 
-Deploy the sample app with a single command. The `tiny` Paketo builder is smaller and faster than the default full builder, which helps on resource-limited environments:
+Deploy the sample app with a single command. Use the Paketo `base` builder (a good default between `tiny` and `full`):
 
 ```bash
-epinio push --name sample --path /tmp/epinio-repo/assets/sample-app --builder-image paketobuildpacks/builder:tiny
+epinio push --name sample --path /tmp/epinio-repo/assets/sample-app --builder-image paketobuildpacks/builder:base
 ```{{exec}}
 
 This command:
