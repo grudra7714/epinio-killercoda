@@ -87,12 +87,41 @@ epinio app show sample
 
 ## Access the Application
 
-Get the application URL and test it:
+Epinio gives the app an **internal** route on your system domain (`<app-name>.<EPINIO_SYSTEM_DOMAIN>`), for example:
+
+`sample.172.30.1.2.sslip.io`
+
+The namespace (`workspace`) is not part of the hostname.
+
+Get the exact route and test it from the terminal:
 
 ```bash
+source /etc/profile.d/epinio-env.sh
+echo "Expected route: sample.${EPINIO_SYSTEM_DOMAIN}"
 export APP_URL=$(epinio app show sample | grep "Route:" | awk '{print $NF}' | head -1)
-echo "App URL: https://$APP_URL"
+echo "Internal app URL: https://$APP_URL"
 curl -k "https://$APP_URL"
 ```{{exec}}
 
 You should see a response from the sample application.
+
+## Expose the app on the internet (browser)
+
+`https://sample.${EPINIO_SYSTEM_DOMAIN}` works inside this environment only. To reach the app from your browser, forward the app Service and use Killercoda **Traffic / Ports**:
+
+```bash
+kubectl port-forward -n workspace svc/sample 8080:80 >/tmp/sample-pf.log 2>&1 &
+sleep 2
+curl -sf http://127.0.0.1:8080 >/dev/null && echo "Port-forward OK"
+```{{exec}}
+
+Open:
+
+- [Public URL on port 8080]({{TRAFFIC_HOST1_8080}}), or
+- [Traffic / Ports]({{TRAFFIC_SELECTOR}}) → port **8080** → **Access**
+
+```bash
+echo "Public URL: $(sed 's/PORT/8080/g' /etc/killercoda/host)"
+```{{exec}}
+
+Tunneling port **443** alone usually fails because ingress expects `Host: sample.${EPINIO_SYSTEM_DOMAIN}`, not the Killercoda proxy hostname.
