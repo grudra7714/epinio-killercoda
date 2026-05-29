@@ -10,7 +10,7 @@ For the installation-focused scenario, see [epinio-get-started](../epinio-get-st
 
 | Step | Title | What learners do |
 |------|--------|------------------|
-| Intro | - | Overview; full Epinio stack installs in the background |
+| Intro | - | Overview; full Epinio stack installs in the background; kubectl explore-while-you-wait activities |
 | 1 | Deploy a Sample Application | Verify Epinio, `epinio push`, curl the app URL |
 | 2 | Manage Your Application | Logs, scale, environment variables |
 | 3 | Namespaces and Cleanup | Create/target namespaces, deploy, delete resources |

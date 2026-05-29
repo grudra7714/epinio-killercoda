@@ -1,6 +1,6 @@
 # Deploy a Sample Application
 
-Epinio is installed and configured in the background (logged in as `admin`; default password is `password` if you need to authenticate again). Let's confirm it is ready, then deploy an application.
+If you explored the intro while the install ran, you may already see Epinio pods `Running`. Otherwise, confirm the stack is ready below (logged in as `admin`; password `password` if you need to log in again).
 
 ## Verify Epinio is Ready
 
